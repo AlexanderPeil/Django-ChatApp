@@ -6,6 +6,10 @@
     .page-content {
         padding: 100px;
     }
+
+    .colorGrey {
+        color: rgba(0, 0, 0, 0.4);
+    }
 </style>
 
 
@@ -14,7 +18,13 @@
     <header class="mdl-layout__header">
         <div class="mdl-layout__header-row">
             <!-- Title -->
-            <span class="mdl-layout-title">Welcome, {{ request.user.first_name }}</span>
+            <span class="mdl-layout-title">
+                {% if request.user.is_authenticated %}
+                Welcome, {{ request.user.first_name }}
+                {% else %}
+                Welcome! Please log in.
+                {% endif %}
+            </span>
             <!-- Add spacer, to align navigation to the right -->
             <div class="mdl-layout-spacer"></div>
             <!-- Navigation. We hide it in small screens. -->
@@ -37,6 +47,15 @@
     </div>
     <main class="mdl-layout__content">
         <div class="page-content">
+
+            {% if request.user.is_authenticated %}
+
+            {% for message in messages %}
+            <div>
+                <span class="colorGrey">[{{ message.created_at }}]</span> {{ message.author.first_name }}: <i>{{ message.text }}</i>
+            </div>
+            {% endfor %}
+
             <form action="/chat/" method="post">
                 {% csrf_token %}
                 <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
@@ -47,6 +66,14 @@
                     Send
                 </button>
             </form>
+
+            {% else %}
+            <h1>Not signed-in</h1>
+            <p>You are not signed-in! <br>
+                Please click <a href="/login/">here</a>
+            </p>
+            {% endif %}
+
         </div>
     </main>
 </div>
