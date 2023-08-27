@@ -1,3 +1,6 @@
+{% extends "base.html" %}
+{% block content %}
+
 <h1>Log-In</h1>
 
 {% if wrongPassword %}
@@ -6,6 +9,7 @@
 
 <form method="POST" action="/login/">
     {% csrf_token %} <!-- I have to send a csrf token to send something to my backend -->
+    <input name="redirect" value="{{ redirect }}" type="hidden">
     <div> 
         <input name="username" type="text">
     </div>
@@ -16,3 +20,5 @@
         <button>Login</button>
     </div>
 </form>
+
+{% endblock %}
