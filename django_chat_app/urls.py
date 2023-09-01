@@ -1,3 +1,10 @@
+# urls.py:
+# 1.) Definiert URL-Muster für das Django-Projekt oder eine Django-App.
+# 2.) Jedes Muster wird einer bestimmten Ansichtsfunktion oder -klasse zugeordnet.
+# 3.) Erlaubt es, benutzerfreundliche URLs zu erstellen und zu steuern, welcher Code ausgeführt wird, wenn ein bestimmter Pfad in der URL angefordert wird.
+
+
+
 """
 URL configuration for django_chat_app project.
 
@@ -17,11 +24,12 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from chat.views import index, login_view
+from chat.views import index, login_view, signup_view
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('chat/', index),
-    path('login/', login_view),
+    path('chat/', index, name='chat'),
+    path('login/', login_view, name='login'),
+    path('signup/', signup_view, name='signup'),
 ]

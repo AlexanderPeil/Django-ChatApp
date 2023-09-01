@@ -1,3 +1,9 @@
+# settings:py:
+# 1.)  Enthält Konfigurationen für ein Django-Projekt.
+# 2.) Bestimmt, wie die Datenbank konfiguriert ist, welche installierten Apps aktiv sind, Zeitzoneneinstellungen, Middleware, Templates und viele andere Aspekte des Projekts.
+# 3.) Sicherheitsrelevante Einstellungen wie SECRET_KEY und Debug-Modus sind hier ebenfalls definiert.
+
+
 """
 Django settings for django_chat_app project.
 

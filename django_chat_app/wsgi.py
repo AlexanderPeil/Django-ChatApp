@@ -1,3 +1,9 @@
+# wsgi.py:
+# 1.) Steht für "Web Server Gateway Interface".
+# 2.) Ist ein Standard für Python-Webanwendungen, um mit Webservern zu kommunizieren.
+# 3.) In Django-Projekten dient wsgi.py als Einstiegspunkt, damit Webserver wie Apache, Nginx usw. die Django-Anwendung bedienen können.
+
+
 """
 WSGI config for django_chat_app project.
 
