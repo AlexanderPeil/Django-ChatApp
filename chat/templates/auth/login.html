@@ -1,24 +1,30 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 {% block content %}
-
-<h1>Log-In</h1>
-
-{% if wrongPassword %}
+  {% if wrongPassword %}
     <p>Username or password is wrong</p>
-{% endif %}
+  {% endif %}
 
-<form method="POST" action="/login/">
-    {% csrf_token %} <!-- I have to send a csrf token to send something to my backend -->
-    <input name="redirect" value="{{ redirect }}" type="hidden">
-    <div> 
-        <input name="username" type="text">
-    </div>
-    <div>
-        <input name="password" type="password">
-    </div>
-    <div>
-        <button>Login</button>
-    </div>
-</form>
+  <div class="loginContainer">
+    <h1>Log-In</h1>
+    <form method="POST" action="/login/">
+      {% csrf_token %}
 
+      <input type="hidden" name="redirect" value="{{ redirect }}" />
+      <div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" name="username" type="text" id="sample3" />
+          <label class="mdl-textfield__label" for="sample3">Password...</label>
+        </div>
+      </div>
+      <div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+          <input class="mdl-textfield__input" name="password" type="password" id="sample3" />
+          <label class="mdl-textfield__label" for="sample3">Password...</label>
+        </div>
+      </div>
+      <div>
+        <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored buttonHover">Login</button>
+      </div>
+    </form>
+  </div>
 {% endblock %}

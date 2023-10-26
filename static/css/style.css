@@ -1,7 +1,75 @@
+body {
+    background-color: #eceefe;
+}
+
 .page-content {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 100px;
 }
 
 .colorGrey {
     color: rgba(0, 0, 0, 0.4);
+}
+
+.loginContainer {
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 45vh;
+    width: 50vw;
+    padding: 50px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    align-items: flex-end;
+}
+
+/* input {
+    border-radius: 5px;
+    padding: 5px;
+    border: 1px solid;
+} */
+
+.loginButton {
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    color: #3f51b5;
+    font-size: 18px;
+    font-weight: 600;
+    transition: all 225ms ease-in-out;
+    background-color:  rgba(63, 81, 181, 0.2);
+}
+
+.loginButton:hover {
+    cursor: pointer;
+    background-color: #3f51b5;
+    color: white;
+}
+
+.sendMessage {
+    background-color:  rgba(63, 81, 181, 0.2);
+}
+
+#messageContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.buttonHover {
+    transition: all 225ms ease-in-out;
+}
+
+.buttonHover:hover {
+    color: #3f51b5;
+    background: white !important;
 }
