@@ -3,11 +3,14 @@ from django.db import models
 from django.conf import settings 
 
 
-
+"""Represents a chat instance with a creation date."""
 class Chat(models.Model):
         created_at = models.DateField(default=datetime.today)
 
 
+"""
+        Represents a chat message with text, creation date, associated chat, author, and receiver.
+"""
 class Message(models.Model):
     text = models.CharField(max_length=500) 
     created_at = models.DateField(default=datetime.today) 

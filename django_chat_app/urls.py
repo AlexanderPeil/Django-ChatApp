@@ -27,6 +27,7 @@ from django.urls import path
 from django.views.generic import RedirectView
 from chat.views import index, login_view, signup_view, logout_view
 
+"""Defines URL patterns for admin access, chat, login, logout, and user sign-up functionalities."""
 
 urlpatterns = [
     path('', RedirectView.as_view(url='/login/')),
