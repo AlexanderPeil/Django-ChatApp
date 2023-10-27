@@ -32,11 +32,20 @@ form {
     align-items: flex-end;
 }
 
-/* input {
-    border-radius: 5px;
-    padding: 5px;
-    border: 1px solid;
-} */
+form p {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+form label {
+    font-weight: 600;
+}
+
+.formSignup {
+    align-items: center !important;
+    gap: 5px !important;
+}
 
 .loginButton {
     border: none;

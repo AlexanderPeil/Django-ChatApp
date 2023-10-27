@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 {% block content %}
-
-<h1>Signup</h1>
-
-<form method="POST">
+  <form method="POST" class="formSignup">
+    <h1>Signup</h1>
     {% csrf_token %}
-    {{form.as_p}}
-    <button type="submit">Registrieren</button>
-</form>
-
+    {{ form.as_p }}
+    <div>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored buttonHover" type="submit">Registrieren</button>
+    </div>
+  </form>
 {% endblock %}
