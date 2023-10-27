@@ -4,8 +4,8 @@
     <div id="messageContainer">
       {% for message in messages %}
         <div>
-          <span class="colorGrey">{{ message.created_at|date:"d.m.Y" }}</span>
-          <span class="senderName"> {{ message.author.username }}: </span>
+          <span class="colorGrey">{{ message.created_at|date:'d.m.Y' }}</span>
+          <span class="senderName">{{ message.author.username }}:</span>
           <i>{{ message.text }}</i>
         </div>
 
@@ -15,48 +15,60 @@
 
     <script>
       async function sendMessage() {
-        let currentUsername = "{{ request.user.username }}";
+        let currentUsername = '{{ request.user.username }}'
         let fd = new FormData()
         let token = '{{ csrf_token }}'
         const dateTime = getCurrentDateTime()
         fd.append('textmessage', messageField.value)
         fd.append('csrfmiddlewaretoken', token)
+      
+        if (messageField.value.trim() == '') {
+          alert('Please write a message')
+          return
+        }
+      
         try {
-          messageContainer.innerHTML += `
-                  <div id="deleteMessage">
-                      <span class="colorGrey">${dateTime}</span>
-                      <span class="senderName"> {{ request.user.username }}: </span>
-                      <i>${messageField.value} </i>
-                  </div>
-                  `
+          showTemplMessage(dateTime)
           let response = await fetch('/chat/', {
             method: 'POST',
             body: fd
           })
-          let json = await response.json();
-          let mainMessage = json.fields.text;
-          document.getElementById('deleteMessage').remove();
-          messageContainer.innerHTML += `
-                  <div>
-                    <span class="colorGrey">${dateTime}</span>
-                    <span class="senderName"> {{ request.user.username }}: </span>
-                    <i>${messageField.value} </i>
-                  </div>
-                  `
+      
+          if (!response.ok) {
+            throw new Error('Network response was not ok')
+          }
+      
+          let jsonResponse  = await response.json()
+
+          document.getElementById('deleteMessage').remove()
+          showMainMessage(dateTime)
         } catch (e) {
           console.log('An error occured', e)
+          alert('There was an error sending your message. Please try again.')
         }
-        messageField.value = '';
+      
+        messageField.value = ''
       }
       
-      {% comment %} function showMainMessage(mainMessage) {
-        let dateTime = getCurrentDateTime()
-        return `
-              <div>
-                  <span class="colorGrey">[${dateTime}]</span> ${mainMessage.author_username}: <i>${mainMessage.text}</i>
-              </div>
-          `
-      } {% endcomment %}
+      function showTemplMessage(dateTime) {
+        messageContainer.innerHTML += `
+                    <div id="deleteMessage">
+                        <span class="colorGrey">${dateTime}</span>
+                        <span class="senderName"> {{ request.user.username }}: </span>
+                        <i>${messageField.value} </i>
+                    </div>
+                    `
+      }
+      
+      function showMainMessage(dateTime) {
+        messageContainer.innerHTML += `
+                    <div>
+                      <span class="colorGrey">${dateTime}</span>
+                      <span class="senderName"> {{ request.user.username }}: </span>
+                      <i>${messageField.value} </i>
+                    </div>
+                    `
+      }
       
       function getCurrentDateTime() {
         const now = new Date()
@@ -75,9 +87,7 @@
         <input class="mdl-textfield__input" name="textmessage" type="text" id="messageField" />
         <label class="mdl-textfield__label" for="messageField">Text...</label>
       </div>
-      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored buttonHover">
-        Send message
-      </button>
+      <button class="mdl-button mdl-js-button mdl-button--raised mdl-button--colored buttonHover">Send message</button>
     </form>
   {% else %}
     <h1>Not signed-in</h1>
